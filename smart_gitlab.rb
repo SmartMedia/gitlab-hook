@@ -3,6 +3,19 @@ require 'bundler/setup'
 
 Bundler.require
 
+configure do
+  uri = URI.parse(ENV["REDISTOGO_URL"])
+  REDIS = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+end
+
+get '/:token' do
+  if url_original = REDIS.get(params[:token])
+    redirect url_original, 302
+  else
+    halt 404, "URL not found"
+  end
+end
+
 post '*' do
   twitter = Twitter::Client.new(
     :consumer_key => "ZlD8gk1vdHqC0vCvWKTstw",
@@ -18,9 +31,13 @@ post '*' do
 
   commits.each do |commit|
     user_name = commit['author']['name']
-    url = commit['url']
+    url_original = commit['url']
+    url_token = nil
+    while not REDIS.get(url_token = rand(36**8).to_s(36))
+      REDIS.set(url_token, url_original)
+    end
     message = commit['message']
-
+    url = "http://smartgitlab.heroku.com/#{url_token}"
     message = "[#{repo_name}] #{url} #{user_name} - #{message}"
     message = message[0..136] + '...' if message.size > 140
 
