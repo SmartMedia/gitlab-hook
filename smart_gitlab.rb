@@ -33,15 +33,16 @@ post '*' do
     user_name = commit['author']['name']
     url_original = commit['url']
     url_token = nil
-    while not REDIS.get(url_token = rand(36**8).to_s(36))
-      REDIS.set(url_token, url_original)
-    end
+    url_token = rand(36**8).to_s(36)
+    REDIS.set(url_token, url_original)
     message = commit['message']
     url = "http://smartgitlab.heroku.com/#{url_token}"
     message = "[#{repo_name}] #{url} #{user_name} - #{message}"
     message = message[0..136] + '...' if message.size > 140
 
+    # puts message
+
     twitter.update(message)
   end
-
+  ""
 end
