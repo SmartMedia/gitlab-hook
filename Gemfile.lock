@@ -21,7 +21,6 @@ GEM
       rack (~> 1.3, >= 1.3.6)
       rack-protection (~> 1.2)
       tilt (~> 1.3, >= 1.3.3)
-    system_timer (1.0)
     thin (1.3.1)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -40,6 +39,5 @@ DEPENDENCIES
   json
   redis
   sinatra
-  system_timer
   thin
   twitter
