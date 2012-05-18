@@ -7,7 +7,7 @@ include GitLabTweet
 Bundler.require
 
 configure do
-  TWITTER = Twitter::Client.new(YAML.load_file('config/twitter.yml'))
+  TwitterClient = GitLabTweet::TwitterClient.new(config_path: 'config/twitter.yml')
   GitLabTweet::ShorterURL.hostname = YAML.load_file('config/gitlab_tweet.yml')['hostname']
 end
 
@@ -21,9 +21,9 @@ get '/:token' do
 end
 
 post '*' do
-  tweets = GitLabTweet::HookParser.new(json: request.body.read, shortener: GitLabTweet::ShorterURL).messages
+  tweets = GitLabTweet::HookParser.new(json: request.body.read, shortener: GitLabTweet::ShorterURL).tweets
   tweets.each do |tweet|
-    TWITTER.update(tweet)
+    TwitterClient.update(tweet)
   end
   ""
 end
