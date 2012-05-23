@@ -17,6 +17,7 @@ TWITTER_OAUTH_TOKEN_SECRET=''`
 ```
 
 * If you want to test localy, setup the same variables used by application in all `*.yml` files in `config` directory.
+* `git push heroku`
 
 ## GitLab
 * Open your project.
