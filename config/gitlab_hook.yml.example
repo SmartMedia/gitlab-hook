@@ -1,2 +1,0 @@
-hostname: 'http://<YOUR_APP_NAME>.heroku.com'
-access_token: '<YOUR_SECRET_PASSPHRASE>'
