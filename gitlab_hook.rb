@@ -7,8 +7,8 @@ include GitLabHook
 Bundler.require
 
 configure do
-  CONFIG = Config.load
-  TwitterClient.config(CONFIG[:twitter])
+  CONFIG = GitLabHook::Config.load
+  TwitterClient = Twitter::Client.new(CONFIG[:twitter])
   ShorterURL.hostname = CONFIG[:hostname]
 end
 
