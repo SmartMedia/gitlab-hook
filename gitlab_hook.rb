@@ -7,8 +7,8 @@ include GitLabHook
 Bundler.require
 
 configure do
-  TwitterClient.config(path: 'config/twitter.yml')
-  CONFIG = YAML.load_file('config/gitlab_tweet.yml')
+  TwitterClient.config(path: 'config/twitter.yml.erb')
+  CONFIG = YAML.load_file('config/gitlab_hook.yml.erb')
   ShorterURL.hostname = CONFIG['hostname']
 end
 
