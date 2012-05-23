@@ -5,6 +5,7 @@
 * Clone this repository: `git clone git@github.com:SmartMedia/gitlab-hook.git`
 * Create Heroku Cedar application: `heroku create <APP_NAME> --stack cedar`
 * Setup variables:
+```bash
     heroku config:add \
     SHORTENER_HOSTNAME='http://<APP_NAME>.heroku.com' \
     SHORTENER_ACCESS_TOKEN='' \
@@ -12,6 +13,7 @@
     TWITTER_CONSUMER_SECRET='' \
     TWITTER_OAUTH_TOKEN='' \
     TWITTER_OAUTH_TOKEN_SECRET=''`
+```    
 * If you want to test localy, setup the same variables used by application in all `*.yml` files in `config` directory.
 
 ## GitLab
