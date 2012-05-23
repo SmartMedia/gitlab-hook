@@ -1,26 +1,17 @@
-module GitLabTweet
+require 'singleton'
+
+module GitLabHook
   class TwitterClient
+    include Singleton
 
-    attr_reader :client
-
-    def initialize(options)
-      config = YAML.load_file(options[:config_path])
-      config = symbolize_keys(config)
-      @client = Twitter::Client.new(config)
+    def self.config(options)
+      config = YAML.load_file(options[:path])
+      config = config.symbolize_keys
+      @@client = Twitter::Client.new(config)
     end
 
-    def update(tweet)
-      client.update(tweet)
-    end
-
-    private
-
-    def symbolize_keys(hash)
-      h = {}
-      hash.each_pair do |key, value|
-        h[(key.to_sym rescue key)] = hash[key]
-      end
-      h
+    def self.update(tweet)
+      @@client.update(tweet)
     end
 
   end

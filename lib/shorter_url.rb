@@ -1,6 +1,6 @@
 require 'singleton'
 
-module GitLabTweet
+module GitLabHook
   class ShorterURL
     include Singleton
 
@@ -13,7 +13,7 @@ module GitLabTweet
     end
 
     def self.set(url)
-      # TODO check for duplicit token
+      # TODO check for duplicate token
       new_token = token
       store.set(new_token, url)
       "#{@@hostname}/#{new_token}"

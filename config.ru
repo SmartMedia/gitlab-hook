@@ -1,4 +1,2 @@
-require './gitlab_tweet'
+require './gitlab_hook'
 run Sinatra::Application
-
-# 192.168.2.76:9292

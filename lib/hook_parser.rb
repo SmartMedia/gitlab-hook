@@ -1,9 +1,9 @@
-module GitLabTweet
+module GitLabHook
   class HookParser
-    attr_reader :body, :tweets, :shortener
+    attr_reader :body, :messages, :shortener
 
     def initialize(options)
-      @tweets = []
+      @messages = []
       @body = JSON.parse(options[:json])
       @shortener = options[:shortener]
       parse
@@ -21,10 +21,10 @@ module GitLabTweet
         gitlab_url = commit['url']
 
         url = shortener.set(gitlab_url)
-        tweet = "[#{repo_name}] #{url} #{user_name} - #{message}"
-        tweet = tweet[0..136] + '...' if tweet.size > 140
+        msg = "[#{repo_name}] #{url} #{user_name} - #{message}"
+        msg = msg[0..136] + '...' if msg.size > 140
 
-        @tweets << tweet
+        @messages << msg
       end
     end
 
