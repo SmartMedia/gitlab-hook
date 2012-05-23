@@ -1,3 +1,2 @@
 .rvmrc
-config/gitlab_hook.yml
-config/twitter.yml
+config/*.yml
