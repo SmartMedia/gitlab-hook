@@ -7,9 +7,9 @@ include GitLabHook
 Bundler.require
 
 configure do
-  TwitterClient.config(path: 'config/twitter.yml.erb')
-  CONFIG = YAML.load_file('config/gitlab_hook.yml.erb')
-  ShorterURL.hostname = CONFIG['hostname']
+  CONFIG = Config.load
+  TwitterClient.config(CONFIG[:twitter])
+  ShorterURL.hostname = CONFIG[:hostname]
 end
 
 get '/:token' do
@@ -23,10 +23,10 @@ end
 
 post '*' do
   access_token = params[:access_token]
-  if access_token != CONFIG['access_token']
+  if access_token != CONFIG[:access_token]
     halt 403, "Please provide correct access_token."
   else
-    messages = GitLabHook::HookParser.new(json: request.body.read, shortener: ShorterURL).messages
+    messages = HookParser.new(json: request.body.read, shortener: ShorterURL).messages
     messages.each do |tweet|
       TwitterClient.update(tweet)
     end
