@@ -21,7 +21,7 @@ module GitLabHook
         gitlab_url = commit['url']
 
         url = shortener.shorten(gitlab_url)
-        msg = "[#{repo_name}] #{url.jmp_url} #{user_name} - #{message}"
+        msg = "[#{repo_name}] #{url} #{user_name} - #{message}"
         msg = msg[0..136] + '...' if msg.size > 140
 
         @messages << msg
