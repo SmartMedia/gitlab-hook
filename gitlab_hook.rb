@@ -9,16 +9,7 @@ Bundler.require
 configure do
   CONFIG = GitLabHook::Config.load
   TwitterClient = Twitter::Client.new(CONFIG[:twitter])
-  ShorterURL.hostname = CONFIG[:hostname]
-end
-
-get '/:token' do
-  token = params[:token]
-  if url = ShorterURL.get(token)
-    redirect url, 302
-  else
-    halt 404, "URL with token #{token} not found."
-  end
+  BitlyClient = Bitly.new(CONFIG[:bitly][:username], CONFIG[:bitly][:api_key])
 end
 
 post '*' do
@@ -26,7 +17,7 @@ post '*' do
   if access_token != CONFIG[:access_token]
     halt 403, "Please provide correct access_token."
   else
-    messages = HookParser.new(json: request.body.read, shortener: ShorterURL).messages
+    messages = HookParser.new(json: request.body.read, shortener: BitlyClient).messages
     messages.each do |tweet|
       TwitterClient.update(tweet)
     end
