@@ -18,16 +18,20 @@
 * Clone this repository: `git clone git@github.com:SmartMedia/gitlab-hook.git`
 * Create Heroku Cedar application: `heroku create <APP_NAME> --stack cedar`
 * Setup variables based on your _Twitter Details_ and _Bitly Settings_ tab:
+* For `GITLAB_ACCESS_TOKEN` use some random string.
 
 ```bash
 heroku config:add \
 GITLAB_ACCESS_TOKEN='' \
+BITLY_USERNAME='' \
+BITLY_API_KEY='' \
 TWITTER_CONSUMER_KEY='' \
 TWITTER_CONSUMER_SECRET='' \
 TWITTER_OAUTH_TOKEN='' \
-TWITTER_OAUTH_TOKEN_SECRET=''`
+TWITTER_OAUTH_TOKEN_SECRET=''
 ```
 
+* Put your 
 * If you want to test localy, setup the same variables used by application in all `*.yml.erb` files in `config` directory.
 * `git push heroku`
 
