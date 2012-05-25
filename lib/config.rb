@@ -2,13 +2,16 @@ require 'erb'
 
 module GitLabHook
   class Config
-    
-    def self.load
-      hash = YAML.load(ERB.new(File.read('config/gitlab_hook.yml.erb')).result)
-      hash = symbolize_keys(hash)
+
+    def self.config
+      load
     end
 
     private
+
+    def self.load
+      @@hash ||= symbolize_keys(YAML.load(ERB.new(File.read('config/gitlab_hook.yml.erb')).result))
+    end
 
     def self.symbolize_keys(hash)
       hash.inject({}) do |options, (key, value)|

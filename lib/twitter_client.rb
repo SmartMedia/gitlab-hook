@@ -6,7 +6,6 @@ module GitLabHook
     def initialize
       config = GitLabHook::Config.config
       @client = Twitter::Client.new(config[:twitter])
-      client
     end
 
     def update(msg)
