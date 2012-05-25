@@ -1,5 +1,4 @@
-hostname: <%= ENV['SHORTENER_HOSTNAME'] || '' %> # URL of your Heroku app
-access_token: <%= ENV['SHORTENER_ACCESS_TOKEN'] || '' %> # random access token, passed as parameter from GitLab
+access_token: <%= ENV['GITLAB_ACCESS_TOKEN'] || '' %> # random access token, passed as parameter from GitLab
 twitter:
   consumer_key: <%= ENV['TWITTER_CONSUMER_KEY'] || '' %>
   consumer_secret: <%= ENV['TWITTER_CONSUMER_SECRET'] || '' %>

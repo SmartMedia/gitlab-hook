@@ -22,7 +22,6 @@ module GitLabHook
 
         url = shortener.shorten(gitlab_url)
         msg = "[#{repo_name}] #{url.short_url} #{user_name} - #{message}"
-        msg = msg[0..136] + '...' if msg.size > 140
 
         @messages << msg
       end
