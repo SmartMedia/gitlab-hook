@@ -8,8 +8,8 @@ Bundler.require
 
 configure do
   CONFIG = GitLabHook::Config.load
-  TwitterClient = GitLabHook::TwitterClient.new
-  BitlyClient = GitLabHook::BitlyClient.new
+  TwitterClient = GitLabHook::TwitterClient.load
+  BitlyClient = GitLabHook::BitlyClient.load
 end
 
 post '*' do

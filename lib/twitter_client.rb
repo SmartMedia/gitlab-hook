@@ -3,6 +3,10 @@ module GitLabHook
 
     attr_reader :client
 
+    def self.load
+      client = new.client
+    end
+
     def initialize
       config = GitLabHook::Config.config
       @client = Twitter::Client.new(config[:twitter])
