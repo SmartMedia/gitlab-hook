@@ -17,7 +17,7 @@
 ### Your computer
 * Clone this repository: `git clone git@github.com:SmartMedia/gitlab-hook.git`
 * Create Heroku Cedar application: `heroku create <APP_NAME> --stack cedar`
-* Setup variables based on your Twitter _Details_ tab:
+* Setup variables based on your _Twitter Details_ and _Bitly Settings_ tab:
 
 ```bash
 heroku config:add \
