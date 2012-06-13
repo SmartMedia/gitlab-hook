@@ -45,8 +45,9 @@ TWITTER_OAUTH_TOKEN_SECRET=''
 
 ### Setting this hook for every project in GitLab
 * SSH to your GitLab server. Navigate to gitlab directory and run `rails c production`
+
 ```ruby
-# If you already have this hook on some project, you can use url = WebHook.first.url
+ # If you already have this hook on some project, you can use url = WebHook.first.url
 url = 'http://<APP_NAME>.herokuapp.com/?access_token=<GITLAB_ACCESS_TOKEN>'
 Project.all.each do |project|
   project.web_hooks << WebHook.create(url: url) if project.web_hooks.empty?
